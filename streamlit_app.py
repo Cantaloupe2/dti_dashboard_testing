@@ -9,7 +9,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 def load_tfidf():
     auths = scipy.sparse.load_npz("transformed_authors.npz")
     titles = scipy.sparse.load_npz("transformed_titles.npz")
-    return auths, titles
+    
+    fileObj = open('auths_trainer.pickle', 'wb')
+    auth_train = pickle.load(fileObj)
+    fileObj.close()
+
+    fileObj = open('titles_trainer.pickle', 'wb')
+    title_train = pickle.load(fileObj)
+    fileObj.close()
+    return auths, titles, auth_train, title_train
 
 
 def find_function(path,indexed_journeys_df):
@@ -29,9 +37,9 @@ def plot_map(my_row):
             folium.PolyLine(locations=[location, location_next], color='green', weight=3).add_to(m)
     folium_static(m)
 
-def advanced_find(name, title):
-    name_vector = auths.transform([name])
-    ##title_vector = titles.transform([title])
+def advanced_find(name,title,auths_db, titles_db, auth_train,title_train):
+    name_vector = auths_train.transform([name])
+    ##title_vector = title_train.transform([title])
     #power_search = st.text_input("Search Papers by Title")
     #power_vector = trainer.transform([power_search])
     # word_list = power_search.split(" ") 
@@ -39,7 +47,7 @@ def advanced_find(name, title):
     # st.write(word_vector)
     # find the cosine similarity between the power search and the first 200 papers
     
-    cos_sim = cosine_similarity(name_vector, tester)
+    cos_sim = cosine_similarity(name_vector, auths_db)
     # find the index of the paper with the highest cosine similarity
     matching_index = cos_sim.argmax()
     # find the indexis of the top 10 papers with the highest cosine similarity
@@ -61,7 +69,7 @@ def main():
     journeys_df = alt_df
     indexed_journeys_df = journeys_df.set_index('@path', inplace=False)
 
-    auths, titles = load_tfidf()
+    auths_db, titles_db = load_tfidf()
     
     st.title('Researcher Migration')
     path = '/0000-0003-4998-7259'
@@ -70,7 +78,7 @@ def main():
     if on:
         name = st.text_input("Input researcher name")
         title = st.text_input("Input a paper title to assist the search")
-        advanced_find(name, title)
+        advanced_find(name, title, auths_db, titles_db, auth_train, title_train)
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
 
