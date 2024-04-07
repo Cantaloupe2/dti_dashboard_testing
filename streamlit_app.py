@@ -59,6 +59,8 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     matching_data = indexed_journeys_df.iloc[matching_index,:]
     
     # change the index of top_ten_titles to the similarity scores
+    st.write(matching_data)
+    st.write(top_sim)
     matching_data.index = top_sim
     matching_data.index.name = "Similarity Score"
     st.write("Top Ten Results")
