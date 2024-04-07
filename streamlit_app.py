@@ -39,7 +39,7 @@ def plot_map(my_row):
     folium_static(m)
 
 def advanced_find(name,title,auths_db, titles_db, auth_train,title_train):
-    name_vector = auths_train.transform([name])
+    name_vector = auth_train.transform([name])
     ##title_vector = title_train.transform([title])
     #power_search = st.text_input("Search Papers by Title")
     #power_vector = trainer.transform([power_search])
