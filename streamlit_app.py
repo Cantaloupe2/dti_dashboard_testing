@@ -64,6 +64,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     select_list = matching_data.loc[:,['author_x','title']]
     st.write(select_list)
     st.write(matching_data)
+    st.select_box("Select An Author", select_list)
     return path
 
 def main():
