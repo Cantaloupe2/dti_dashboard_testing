@@ -56,7 +56,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train):
     top_ten = top_ten[::-1]
     top_sim = cos_sim[0][top_ten]
     # find the title of the paper with the highest cosine similarity
-    matching_data = journeys_df.iloc[matching_index,:]
+    matching_data = journeys_df.loc[matching_index]
     
     # change the index of top_ten_titles to the similarity scores
     matching_data.index = top_sim
