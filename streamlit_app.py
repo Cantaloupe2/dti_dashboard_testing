@@ -4,6 +4,7 @@ import pandas as pd
 from streamlit_folium import folium_static
 import scipy.sparse
 from sklearn.metrics.pairwise import cosine_similarity
+import pickle
 
 @st.cache
 def load_tfidf():
