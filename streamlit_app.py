@@ -68,10 +68,12 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
         if len(select_list.loc[i,'author_x']) == 2:
             select_list.loc[i,'author_x'] = select_list.loc[i,'author_x']
             select_list.loc[i,'title'] = select_list.loc[i,'title']
+            st.write(select_list.loc[i,'author_x'])
         else: 
             select_list.loc[i,'author_x'] = select_list.loc[i,'author_x'][0]
             select_list.loc[i,'title'] = select_list.loc[i,'title'][0]
-        st.write(select_list.loc[i,'author_x'][0])
+            st.write(select_list.loc[i,'author_x'][0])
+        
     st.write(matching_data)
     st.selectbox("Select An Author", select_list)
     return path
