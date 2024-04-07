@@ -61,6 +61,8 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     # change the index of top_ten_titles to the similarity scores
     matching_data.index = top_sim
     matching_data.index.name = "Similarity Score"
+    select_list = matching_data.loc[:,['author_x','title']]
+    st.write(select_list)
     st.write(matching_data)
     return path
 
