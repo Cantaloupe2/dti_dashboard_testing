@@ -4,3 +4,4 @@ pandas
 tables
 scipy
 scikit-learn
+pickle
