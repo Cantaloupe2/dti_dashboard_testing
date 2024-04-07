@@ -66,7 +66,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     matching_data.index.name = "Similarity Score"
     st.write("Top Ten Results")
     st.write(matching_data)
-    return 
+    return path
 
 def main():
     alt_df = pd.read_hdf('Path_By_Researchers_With_Year.h5')
@@ -83,7 +83,7 @@ def main():
     if on:
         name = st.text_input("Input researcher name")
         title = st.text_input("Input a paper title to assist the search")
-        advanced_find(name, title, auths_db, titles_db, auth_train, title_train, indexed_journeys_df)
+        path = advanced_find(name, title, auths_db, titles_db, auth_train, title_train, indexed_journeys_df)
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
 
