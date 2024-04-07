@@ -62,7 +62,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     matching_data.index = top_sim
     matching_data.index.name = "Similarity Score"
     select_list = matching_data.loc[:,['author_x','title']]
-    for i, val in select_list.itterows():
+    for i, val in select_list.iterrows():
         select_list.loc[i,'author_x'] = select_list.loc[i,'author_x'][0]
         select_list.loc[i,'title'] = select_list.loc[i,'title'][0]
     st.write(select_list)
