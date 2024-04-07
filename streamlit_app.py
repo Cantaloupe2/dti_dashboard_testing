@@ -38,7 +38,7 @@ def plot_map(my_row):
             folium.PolyLine(locations=[location, location_next], color='green', weight=3).add_to(m)
     folium_static(m)
 
-def advanced_find(name,title,auths_db, titles_db, auth_train,title_train):
+def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed_journeys_df):
     name_vector = auth_train.transform([name])
     ##title_vector = title_train.transform([title])
     #power_search = st.text_input("Search Papers by Title")
@@ -56,7 +56,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train):
     top_ten = top_ten[::-1]
     top_sim = cos_sim[0][top_ten]
     # find the title of the paper with the highest cosine similarity
-    matching_data = journeys_df.loc[matching_index]
+    matching_data = indexed_journeys_df.iloc[matching_index,:]
     
     # change the index of top_ten_titles to the similarity scores
     matching_data.index = top_sim
@@ -79,7 +79,7 @@ def main():
     if on:
         name = st.text_input("Input researcher name")
         title = st.text_input("Input a paper title to assist the search")
-        advanced_find(name, title, auths_db, titles_db, auth_train, title_train)
+        advanced_find(name, title, auths_db, titles_db, auth_train, title_train, indexed_journeys_df)
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
 
