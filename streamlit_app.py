@@ -11,11 +11,11 @@ def load_tfidf():
     auths = scipy.sparse.load_npz("transformed_authors.npz")
     titles = scipy.sparse.load_npz("transformed_titles.npz")
     
-    fileObj = open('auths_trainer.pickle', 'wb')
+    fileObj = open('auths_trainer.pickle', 'rb')
     auth_train = pickle.load(fileObj)
     fileObj.close()
 
-    fileObj = open('titles_trainer.pickle', 'wb')
+    fileObj = open('titles_trainer.pickle', 'rb')
     title_train = pickle.load(fileObj)
     fileObj.close()
     return auths, titles, auth_train, title_train
