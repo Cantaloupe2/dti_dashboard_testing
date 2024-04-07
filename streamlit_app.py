@@ -70,7 +70,7 @@ def main():
     journeys_df = alt_df
     indexed_journeys_df = journeys_df.set_index('@path', inplace=False)
 
-    auths_db, titles_db = load_tfidf()
+    auths_db, titles_db, auth_train, title_train = load_tfidf()
     
     st.title('Researcher Migration')
     path = '/0000-0003-4998-7259'
