@@ -64,7 +64,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     select_list = matching_data.loc[:,['author_x','title']]
     st.write(select_list)
     for i, val in select_list.iterrows():
-        st.write(len(select_list.loc[i,'author_x']))
+        st.write(isinstance(select_list.loc[i,'author_x'],str))
         if isinstance(select_list.loc[i,'author_x'],str):
             select_list.loc[i,'author_x'] = select_list.loc[i,'author_x']
             select_list.loc[i,'title'] = select_list.loc[i,'title']
