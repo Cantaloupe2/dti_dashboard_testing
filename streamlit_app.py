@@ -47,11 +47,9 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     # word_vector = trainer.transform(word_list) 
     # st.write(word_vector)
     # find the cosine similarity between the power search and the first 200 papers
-    st.write(name_vector)
-    st.write(auths_db)
     cos_sim_auth = cosine_similarity(name_vector, auths_db)
-    st.write(title_vector)
-    st.write(titles_db)
+    st.write(len(title_vector[1]))
+    st.write(len(titles_db[1]))
     cos_sim_title = cosine_similarity(title_vector, titles_db)
     # find the index of the paper with the highest cosine similarity
     cos_sim = cos_sim_auth + cos_sim_title
