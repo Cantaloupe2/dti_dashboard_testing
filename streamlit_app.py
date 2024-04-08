@@ -6,7 +6,7 @@ import scipy.sparse
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 
-@st.cache
+@st.cache_data
 def load_tfidf():
     auths = scipy.sparse.load_npz("transformed_authors.npz")
     titles = scipy.sparse.load_npz("transformed_titles.npz")
