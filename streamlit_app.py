@@ -50,7 +50,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     cos_sim_auth = cosine_similarity(name_vector, auths_db)
     cos_sim_title = cosine_similarity(title_vector, titles_db)
     # find the index of the paper with the highest cosine similarity
-    cos_sim = cos_sim_auth + 2*cos_sim_title
+    cos_sim = cos_sim_auth + 4*cos_sim_title
     matching_index = cos_sim.argmax()
     # find the indexis of the top 10 papers with the highest cosine similarity
     top_ten = cos_sim.argsort()[0][-10:]
