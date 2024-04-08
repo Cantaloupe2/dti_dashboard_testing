@@ -65,13 +65,13 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     st.write(select_list)
     for i, row in select_list.iterrows():
         st.write(len(row.author_x))
-        if True:
-            select_list.loc[i,'author_x'] = select_list.loc[i,'author_x']
-            select_list.loc[i,'title'] = select_list.loc[i,'title']
+        if len(row.author_x) == 1:
+            select_list.loc[i,'author_x'] = row.author_x
+            select_list.loc[i,'title'] = row.author_x
             st.write(select_list.loc[i,'author_x'])
         else: 
-            select_list.loc[i,'author_x'] = select_list.loc[i,'author_x'][0]
-            select_list.loc[i,'title'] = select_list.loc[i,'title'][0]
+            select_list.loc[i,'author_x'] = row.author_x[0]
+            select_list.loc[i,'title'] = row.author_x[0]
             st.write(select_list.loc[i,'author_x'][0])
         
     st.write(matching_data)
