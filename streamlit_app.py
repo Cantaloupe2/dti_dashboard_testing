@@ -9,7 +9,7 @@ import pickle
 @st.cache_data
 def load_tfidf():
     auths = scipy.sparse.load_npz("transformed_authors.npz")
-    titles = scipy.sparse.load_npz("transformed_titles.npz")
+    titles = scipy.sparse.load_npz("transformed_titles_2.npz")
     
     fileObj = open('auths_trainer.pickle', 'rb')
     auth_train = pickle.load(fileObj)
