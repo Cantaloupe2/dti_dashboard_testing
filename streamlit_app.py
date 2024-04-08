@@ -75,7 +75,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     st.write(index)
     st.write(matching_data.iloc[index,7][0])
     index = matching_data.iloc[index,7][0]
-    path = indexed_journeys_df.index[index]
+    #path = indexed_journeys_df.index[index]
     return path
 
 def main():
