@@ -59,8 +59,8 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     matching_data = indexed_journeys_df.iloc[top_ten,:]
     path = indexed_journeys_df.index[matching_index]
     # change the index of top_ten_titles to the similarity scores
-    matching_data.index = top_sim
-    matching_data.index.name = "Similarity Score"
+    # matching_data.index = top_sim
+    # matching_data.index.name = "Similarity Score"
     select_list = matching_data.loc[:,['author_x','title']]
     for i, row in select_list.iterrows():
         if len(row.author_x) == 0:
