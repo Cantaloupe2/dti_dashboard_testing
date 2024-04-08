@@ -40,7 +40,7 @@ def plot_map(my_row):
 
 def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed_journeys_df):
     name_vector = auth_train.transform([name])
-    ##title_vector = title_train.transform([title])
+    title_vector = title_train.transform([title])
     #power_search = st.text_input("Search Papers by Title")
     #power_vector = trainer.transform([power_search])
     # word_list = power_search.split(" ") 
@@ -48,8 +48,10 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     # st.write(word_vector)
     # find the cosine similarity between the power search and the first 200 papers
     
-    cos_sim = cosine_similarity(name_vector, auths_db)
+    cos_sim_auth = cosine_similarity(name_vector, auths_db)
+    cos_sim_title = cosine_similarity(title_vector, titles_db)
     # find the index of the paper with the highest cosine similarity
+    cos_sim = cos_sim_auth + cos_sim_title
     matching_index = cos_sim.argmax()
     # find the indexis of the top 10 papers with the highest cosine similarity
     top_ten = cos_sim.argsort()[0][-10:]
@@ -58,9 +60,6 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     # find the title of the paper with the highest cosine similarity
     matching_data = indexed_journeys_df.iloc[top_ten,:]
     path = indexed_journeys_df.index[matching_index]
-    # change the index of top_ten_titles to the similarity scores
-    # matching_data.index = top_sim
-    # matching_data.index.name = "Similarity Score"
     select_list = matching_data.loc[:,['author_x','title']]
     for i, row in select_list.iterrows():
         if len(row.author_x) == 0:
@@ -72,9 +71,6 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
         
     selection = st.selectbox("Select An Author", select_list)
     index = list(select_list.loc[:,'author_x']).index(selection)
-    # st.write(index)
-    # st.write(matching_data.index[index])
-    # index = matching_data.iloc[index,7][0]
     path = matching_data.index[index]
     return path
 
