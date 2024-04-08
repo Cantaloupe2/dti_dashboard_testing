@@ -66,11 +66,11 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     for i, row in select_list.iterrows():
         st.write(len(row.author_x))
         if len(row.author_x) == 0:
-            select_list.loc[i,'author_x'] = row.author_x + ': ' + row.title
+            select_list.loc[i,'author_x'] = str(row.author_x) + ': ' + str(row.title)
         elif isinstance(row.author_x,str):
-            select_list.loc[i,'author_x'] = row.author_x + ': ' + row.title
+            select_list.loc[i,'author_x'] = str(row.author_x) + ': ' + str(row.title)
         else: 
-            select_list.loc[i,'author_x'] = row.author_x[0] + ': ' + row.title[0]
+            select_list.loc[i,'author_x'] = str(row.author_x[0]) + ': ' + str(row.title[0])
         
     st.write(matching_data)
     st.selectbox("Select An Author", select_list)
