@@ -67,13 +67,13 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
         st.write(len(row.author_x))
         if len(row.author_x) == 0:
             select_list.loc[i,'author_x'] = row.author_x
-            select_list.loc[i,'title'] = row.title_x
+            select_list.loc[i,'title'] = row.title
         elif isinstance(row.author_x,str):
             select_list.loc[i,'author_x'] = row.author_x
-            select_list.loc[i,'title'] = row.title_x
+            select_list.loc[i,'title'] = row.title
         else: 
             select_list.loc[i,'author_x'] = row.author_x[0]
-            select_list.loc[i,'title'] = row.title_x[0]
+            select_list.loc[i,'title'] = row.title[0]
         
     st.write(matching_data)
     st.selectbox("Select An Author", select_list)
