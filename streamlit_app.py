@@ -15,9 +15,9 @@ def load_tfidf():
     auth_train = pickle.load(fileObj)
     fileObj.close()
 
-    fileObj = open('titles_trainer.pickle', 'rb')
-    title_train = pickle.load(fileObj)
-    fileObj.close()
+    fileObj1 = open('titles_trainer.pickle', 'rb')
+    title_train = pickle.load(fileObj1)
+    fileObj1.close()
     return auths, titles, auth_train, title_train
 
 
