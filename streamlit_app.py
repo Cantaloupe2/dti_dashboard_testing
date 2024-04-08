@@ -62,9 +62,7 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     matching_data.index = top_sim
     matching_data.index.name = "Similarity Score"
     select_list = matching_data.loc[:,['author_x','title']]
-    st.write(select_list)
     for i, row in select_list.iterrows():
-        st.write(len(row.author_x))
         if len(row.author_x) == 0:
             select_list.loc[i,'author_x'] = str(row.author_x) + ': ' + str(row.title)
         elif isinstance(row.author_x,str):
@@ -72,7 +70,6 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
         else: 
             select_list.loc[i,'author_x'] = str(row.author_x[0]) + ': ' + str(row.title[0])
         
-    st.write(matching_data)
     selection = st.selectbox("Select An Author", select_list)
     index = list(select_list.loc[:,'author_x']).index(selection)
     st.write(index)
