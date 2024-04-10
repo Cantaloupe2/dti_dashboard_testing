@@ -36,7 +36,7 @@ def plot_map(my_row):
         popup = f"{my_row['title'][i]} {val} {my_row['year'][i]}"
         folium.Marker(location=location, popup=popup, icon=folium.Icon(color=color)).add_to(m) # 
         if i < len(my_row['country'])-1:
-            location_next = (my_row['latitude'][i+1], my_row['longitude'][i+1])
+            location_next = (my_row['latitude'][i+1]+((i+1)%2)/1000, my_row['longitude'][i+1]+((i+1)%2)/1000)
             folium.PolyLine(locations=[location, location_next], color='green', weight=3).add_to(m)
     folium_static(m)
 
