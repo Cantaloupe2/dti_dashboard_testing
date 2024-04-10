@@ -64,11 +64,11 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     select_list = matching_data.loc[:,['author_x','title']]
     for i, row in select_list.iterrows():
         if len(row.author_x) == 0:
-            select_list.loc[i,'author_x'] = str(row.author_x) + '\n ' + str(row.title)
+            select_list.loc[i,'author_x'] = str(row.author_x) + '   ' + str(row.title)
         elif isinstance(row.author_x,str):
-            select_list.loc[i,'author_x'] = str(row.author_x) + '\n ' + str(row.title)
+            select_list.loc[i,'author_x'] = str(row.author_x) + '   ' + str(row.title)
         else: 
-            select_list.loc[i,'author_x'] = str(row.author_x[0]) + '\n ' + str(row.title[0])
+            select_list.loc[i,'author_x'] = str(row.author_x[0]) + '   ' + str(row.title[0])
         
     selection = st.selectbox("Select An Author", select_list)
     index = list(select_list.loc[:,'author_x']).index(selection)
