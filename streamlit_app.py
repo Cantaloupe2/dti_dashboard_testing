@@ -32,7 +32,7 @@ def plot_map(my_row):
     for i, val in enumerate(my_row['country']):
         color = color_list[i%2]
         country = val
-        location = (my_row['latitude'][i]+(i%2)/1000, my_row['longitude'][i]+(i%2)1000)
+        location = (my_row['latitude'][i]+(i%2)/1000, my_row['longitude'][i]+(i%2)/1000)
         popup = f"{my_row['title'][i]} {val} {my_row['year'][i]}"
         folium.Marker(location=location, popup=popup, icon=folium.Icon(color=color)).add_to(m) # 
         if i < len(my_row['country'])-1:
