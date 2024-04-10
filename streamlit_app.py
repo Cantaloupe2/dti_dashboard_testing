@@ -28,7 +28,7 @@ def find_function(path,indexed_journeys_df):
 def plot_map(my_row):
     start_loc = (my_row['latitude'][0],my_row['longitude'][0])
     m = folium.Map(location=start_loc, zoom_start=5)
-    color_list = ['blue','red','orange','purple', 'black']
+    color_list = ['blue','red','orange','purple', 'green']
     for i, val in enumerate(my_row['country']):
         color = color_list[i%4]
         country = val
