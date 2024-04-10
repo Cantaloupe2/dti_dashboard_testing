@@ -28,11 +28,13 @@ def find_function(path,indexed_journeys_df):
 def plot_map(my_row):
     start_loc = (my_row['latitude'][0],my_row['longitude'][0])
     m = folium.Map(location=start_loc, zoom_start=5)
+    color_list = ['blue','red','orange']
     for i, val in enumerate(my_row['country']):
+        color = color_list[i%2]
         country = val
         location = (my_row['latitude'][i], my_row['longitude'][i])
         popup = f"{my_row['title'][i]} {val} {my_row['year'][i]}"
-        folium.Marker(location=location, popup=popup, icon=folium.Icon()).add_to(m) # color='blue'
+        folium.Marker(location=location, popup=popup, icon=folium.Icon(color=color)).add_to(m) # 
         if i < len(my_row['country'])-1:
             location_next = (my_row['latitude'][i+1], my_row['longitude'][i+1])
             folium.PolyLine(locations=[location, location_next], color='green', weight=3).add_to(m)
