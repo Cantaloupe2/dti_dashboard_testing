@@ -5,6 +5,7 @@ from streamlit_folium import folium_static
 import scipy.sparse
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
+import NetMigration
 
 @st.cache_data
 def load_tfidf():
@@ -102,6 +103,7 @@ def main():
     if sidebar == 'Individual Search':
         IndividualSearch()
     if sidebar == 'Migration Patterns':
+        NetMigration.Visualize()
         MigrationSearch()
 
 if __name__ == "__main__":
