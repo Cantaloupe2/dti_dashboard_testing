@@ -1,6 +1,3 @@
-import streamlit as st
-import pandas as pd
-import folium
 import requests
 from streamlit_folium import folium_static
 import json
@@ -55,14 +52,27 @@ def process_data(df, target_country):
 
     return merged_df
 
-def plot_choropleth(geojson_data, data, target_country):
+def plot_choropleth(geojson_data, data, target_country, net_df):
+    
+    m = folium.Map(location=[20, 0], zoom_start=2)
+    folium.Choropleth(
+            geo_data=geojson_data,
+            name=f'Net Country Migration',
+            data= net_df,
+            columns=['country', 'net_frequency'],
+            key_on='feature.properties.name',
+            fill_color='RdYlGn',#YlGnBu
+            fill_opacity=0.7,
+            line_opacity=0.2,
+            legend_name=f'Net Migration'
+        ).add_to(m)
+    
     
     data = data.fillna(0)
     data['entering_frequency'] = pd.to_numeric(data['entering_frequency'], errors='coerce').fillna(0)
     data['leaving_frequency'] = pd.to_numeric(data['leaving_frequency'], errors='coerce').fillna(0)
     data['net_frequency'] = pd.to_numeric(data['net_frequency'], errors='coerce').fillna(0)
 
-    m = folium.Map(location=[20, 0], zoom_start=2)
 
     folium.Choropleth(
         geo_data=geojson_data,
@@ -108,6 +118,7 @@ def Visualize():
     
     df = load_data()
     geojson_data = load_geojson()
+    net_df = pd.read_csv('net_migration.csv')
     
     countries = ['Portugal', 'United States of America', 'United Kingdom', 'France',
        'South Africa', 'Italy', 'Japan', 'Denmark', 'Taiwan', 'Russia',
@@ -136,7 +147,7 @@ def Visualize():
     if target_country:
         data = process_data(df, target_country)
         if data is not None:
-            m = plot_choropleth(geojson_data, data, target_country)
+            m = plot_choropleth(geojson_data, data, target_country, net_df)
             if m is not None:
                 folium_static(m)
               
