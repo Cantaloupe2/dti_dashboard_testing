@@ -75,7 +75,8 @@ def advanced_find(name,title,auths_db, titles_db, auth_train,title_train,indexed
     path = matching_data.index[index]
     return path
 
-def main():
+def IndividualSearch():
+    st.title('Individual Search')
     alt_df = pd.read_hdf('Path_By_Researchers_With_Year.h5')
     journeys_df = pd.read_hdf('author_journeys.h5')
     journeys_df = alt_df
@@ -83,7 +84,7 @@ def main():
 
     auths_db, titles_db, auth_train, title_train = load_tfidf()
     
-    st.title('Researcher Migration')
+    
     # path = '/0000-0003-4998-7259'
     # path = st.text_input("Write Path Here",path)
     name = st.text_input("Input researcher name")
@@ -91,6 +92,14 @@ def main():
     path = advanced_find(name, title, auths_db, titles_db, auth_train, title_train, indexed_journeys_df)
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
+    
+def main():
+    st.title('Researcher Migration Dashboard')
+    sidebar = st.sidebar.selectbox('Pages', options=['Individual Search', 'Migration Patterns'], index=0)
+    if sidebar == 'Individual Search':
+        IndividualSearch()
+    if sidebar == 'Migration Patterns':
+        st.title('Migration Patterns)
 
 if __name__ == "__main__":
     main()
