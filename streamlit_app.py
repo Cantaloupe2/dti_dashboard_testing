@@ -99,7 +99,7 @@ def main():
     if sidebar == 'Individual Search':
         IndividualSearch()
     if sidebar == 'Migration Patterns':
-        st.title('Migration Patterns)
+        st.title('Migration Patterns')
 
 if __name__ == "__main__":
     main()
