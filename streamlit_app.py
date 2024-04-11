@@ -92,6 +92,9 @@ def IndividualSearch():
     path = advanced_find(name, title, auths_db, titles_db, auth_train, title_train, indexed_journeys_df)
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
+
+def MigrationSearch():
+    st.title('Migration Patterns')
     
 def main():
     st.title('Researcher Migration Dashboard')
@@ -99,7 +102,7 @@ def main():
     if sidebar == 'Individual Search':
         IndividualSearch()
     if sidebar == 'Migration Patterns':
-        st.title('Migration Patterns')
+        MigrationSearch()
 
 if __name__ == "__main__":
     main()
