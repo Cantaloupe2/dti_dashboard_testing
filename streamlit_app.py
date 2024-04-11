@@ -94,9 +94,6 @@ def IndividualSearch():
     row = find_function(path,indexed_journeys_df)
     plot_map(row)
 
-def MigrationSearch():
-    st.title('Migration Patterns')
-    
 def main():
     st.title('Researcher Migration Dashboard')
     sidebar = st.sidebar.selectbox('Pages', options=['Individual Search', 'Migration Patterns'], index=0)
@@ -104,7 +101,6 @@ def main():
         IndividualSearch()
     if sidebar == 'Migration Patterns':
         NetMigration.Visualize()
-        MigrationSearch()
 
 if __name__ == "__main__":
     main()
