@@ -70,8 +70,8 @@ def plot_choropleth(geojson_data, data, target_country, net_df):
                 legend_name=f'Net Migration'
             ).add_to(m)
     else:
+        m = folium.Map(location=[20, 0], zoom_start=2)
         if bool == False:
-            m = folium.Map(location=[20, 0], zoom_start=2)
             folium.Choropleth(
                     geo_data=geojson_data,
                     name=f'Net Country Migration',
@@ -158,7 +158,7 @@ def Visualize():
        'Sri Lanka', 'Haiti', 'Dominican Rep.', 'Panama', 'Kuwait',
        'Somalia', 'Madagascar', 'Uganda', 'Gambia', 'Mongolia', 'Angola',
        'Uruguay', 'Bosnia and Herz.', 'Albania', 'Nicaragua', 'Yemen']
-    bool = st.button("World Net Migration")
+    bool = st.button("Alternate Visualization")
     if bool == True:
         countries = ['All'] + countries
     target_country = st.selectbox('Select a Country', countries)
