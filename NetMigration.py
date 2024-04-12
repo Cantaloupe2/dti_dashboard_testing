@@ -70,18 +70,19 @@ def plot_choropleth(geojson_data, data, target_country, net_df):
                 legend_name=f'Net Migration'
             ).add_to(m)
     else:
-        m = folium.Map(location=[20, 0], zoom_start=2)
-        folium.Choropleth(
-                geo_data=geojson_data,
-                name=f'Net Country Migration',
-                data= net_df,
-                columns=['country', 'net_frequency'],
-                key_on='feature.properties.name',
-                fill_color='RdYlGn',#YlGnBu
-                fill_opacity=0.7,
-                line_opacity=0.2,
-                legend_name=f'Net Migration'
-            ).add_to(m)
+        if bool == False:
+            m = folium.Map(location=[20, 0], zoom_start=2)
+            folium.Choropleth(
+                    geo_data=geojson_data,
+                    name=f'Net Country Migration',
+                    data= net_df,
+                    columns=['country', 'net_frequency'],
+                    key_on='feature.properties.name',
+                    fill_color='RdYlGn',#YlGnBu
+                    fill_opacity=0.7,
+                    line_opacity=0.2,
+                    legend_name=f'Net Migration'
+                ).add_to(m)
         
         
         data = data.fillna(0)
