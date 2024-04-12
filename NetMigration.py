@@ -157,7 +157,7 @@ def Visualize():
        'Sri Lanka', 'Haiti', 'Dominican Rep.', 'Panama', 'Kuwait',
        'Somalia', 'Madagascar', 'Uganda', 'Gambia', 'Mongolia', 'Angola',
        'Uruguay', 'Bosnia and Herz.', 'Albania', 'Nicaragua', 'Yemen']
-    bool = st.button("Alternate Visualization")
+    bool = st.button("World Net Migration Visualization Alternative")
     target_country = st.selectbox('Select a Country', countries)
     
     if target_country:
