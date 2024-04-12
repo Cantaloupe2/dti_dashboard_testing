@@ -56,8 +56,7 @@ def process_data(df, target_country):
     return merged_df
 
 def plot_choropleth(geojson_data, data, target_country, net_df):
-    bool = st.button("World Net Migration")
-    if bool == True:
+    if target_country == 'All':
         m = folium.Map(location=[20, 0], zoom_start=2)
         folium.Choropleth(
                 geo_data=geojson_data,
@@ -158,7 +157,9 @@ def Visualize():
        'Sri Lanka', 'Haiti', 'Dominican Rep.', 'Panama', 'Kuwait',
        'Somalia', 'Madagascar', 'Uganda', 'Gambia', 'Mongolia', 'Angola',
        'Uruguay', 'Bosnia and Herz.', 'Albania', 'Nicaragua', 'Yemen']
-    
+    bool = st.button("World Net Migration")
+    if bool == True:
+        countries = ['All'] + countries
     target_country = st.selectbox('Select a Country', countries)
     
     if target_country:
