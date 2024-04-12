@@ -56,64 +56,78 @@ def process_data(df, target_country):
     return merged_df
 
 def plot_choropleth(geojson_data, data, target_country, net_df):
+    bool = st.toggle("Fun Switch")
+    if bool == True:
+        m = folium.Map(location=[20, 0], zoom_start=2)
+        folium.Choropleth(
+                geo_data=geojson_data,
+                name=f'Net Country Migration',
+                data= net_df,
+                columns=['country', 'net_frequency'],
+                key_on='feature.properties.name',
+                fill_color='RdYlGn',#YlGnBu
+                fill_opacity=0.7,
+                line_opacity=0.2,
+                legend_name=f'Net Migration'
+            ).add_to(m)
+    else:
+        m = folium.Map(location=[20, 0], zoom_start=2)
+        folium.Choropleth(
+                geo_data=geojson_data,
+                name=f'Net Country Migration',
+                data= net_df,
+                columns=['country', 'net_frequency'],
+                key_on='feature.properties.name',
+                fill_color='RdYlGn',#YlGnBu
+                fill_opacity=0.7,
+                line_opacity=0.2,
+                legend_name=f'Net Migration'
+            ).add_to(m)
+        
+        
+        data = data.fillna(0)
+        data['entering_frequency'] = pd.to_numeric(data['entering_frequency'], errors='coerce').fillna(0)
+        data['leaving_frequency'] = pd.to_numeric(data['leaving_frequency'], errors='coerce').fillna(0)
+        data['net_frequency'] = pd.to_numeric(data['net_frequency'], errors='coerce').fillna(0)
     
-    m = folium.Map(location=[20, 0], zoom_start=2)
-    folium.Choropleth(
+    
+        folium.Choropleth(
             geo_data=geojson_data,
-            name=f'Net Country Migration',
-            data= net_df,
-            columns=['country', 'net_frequency'],
+            name=f'Entering {target_country}',
+            data= data,
+            columns=['country', 'entering_frequency'],
             key_on='feature.properties.name',
-            fill_color='RdYlGn',#YlGnBu
+            fill_color='YlGnBu',
             fill_opacity=0.7,
             line_opacity=0.2,
-            legend_name=f'Net Migration'
+            legend_name=f'Entering {target_country}'
         ).add_to(m)
     
+        folium.Choropleth(
+            geo_data=geojson_data,
+            name=f'Leaving {target_country}',
+            data=data,
+            columns=['country', 'leaving_frequency'],
+            key_on='feature.properties.name',
+            fill_color='YlOrRd',
+            fill_opacity=0.7,
+            line_opacity=0.2,
+            legend_name=f'Leaving {target_country}'
+        ).add_to(m)
     
-    data = data.fillna(0)
-    data['entering_frequency'] = pd.to_numeric(data['entering_frequency'], errors='coerce').fillna(0)
-    data['leaving_frequency'] = pd.to_numeric(data['leaving_frequency'], errors='coerce').fillna(0)
-    data['net_frequency'] = pd.to_numeric(data['net_frequency'], errors='coerce').fillna(0)
-
-
-    folium.Choropleth(
-        geo_data=geojson_data,
-        name=f'Entering {target_country}',
-        data= data,
-        columns=['country', 'entering_frequency'],
-        key_on='feature.properties.name',
-        fill_color='YlGnBu',
-        fill_opacity=0.7,
-        line_opacity=0.2,
-        legend_name=f'Entering {target_country}'
-    ).add_to(m)
-
-    folium.Choropleth(
-        geo_data=geojson_data,
-        name=f'Leaving {target_country}',
-        data=data,
-        columns=['country', 'leaving_frequency'],
-        key_on='feature.properties.name',
-        fill_color='YlOrRd',
-        fill_opacity=0.7,
-        line_opacity=0.2,
-        legend_name=f'Leaving {target_country}'
-    ).add_to(m)
-
-    folium.Choropleth(
-        geo_data=geojson_data,
-        name=f'Net Movement in relation to {target_country}',
-        data=data,
-        columns=['country', 'net_frequency'],
-        key_on='feature.properties.name',
-        fill_color='PiYG',
-        fill_opacity=0.7,
-        line_opacity=0.2,
-        legend_name=f'Net Movement in relation to {target_country}'
-    ).add_to(m)
-
-    folium.LayerControl().add_to(m)
+        folium.Choropleth(
+            geo_data=geojson_data,
+            name=f'Net Movement in relation to {target_country}',
+            data=data,
+            columns=['country', 'net_frequency'],
+            key_on='feature.properties.name',
+            fill_color='PiYG',
+            fill_opacity=0.7,
+            line_opacity=0.2,
+            legend_name=f'Net Movement in relation to {target_country}'
+        ).add_to(m)
+    
+        folium.LayerControl().add_to(m)
     return m
 
 def Visualize():
